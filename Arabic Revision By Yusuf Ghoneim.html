@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arabic Revision — Created by Yusuf Ghoneim</title>
+<style>
+:root{--bg:#090b16;--surface:#111629;--surface2:#171e35;--surface3:#202943;--accent:#800020;--accent2:#ed557c;--glow:#80002055;--text:#f8f5fa;--muted:#aeb6cb;--line:#ffffff17;--good:#4adea3;--bad:#ff7088;--gold:#f5c66d}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 12% 0%,var(--glow),transparent 35%),radial-gradient(ellipse at 95% 25%,#5a3ca622,transparent 32%),var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh;transition:background .3s;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(#000,transparent 80%);z-index:-1}
+button,select{font:inherit}
+button{cursor:pointer;color:var(--text);border:1px solid var(--line);background:#ffffff08;border-radius:13px;padding:12px 17px;transition:transform .2s,border .2s,background .2s}
+button:hover{transform:translateY(-2px);border-color:#ed557c88;background:#ffffff12}
+button:disabled{opacity:.65;cursor:default;transform:none}
+.primary{background:linear-gradient(115deg,var(--accent),var(--accent2));border:0;box-shadow:0 8px 28px var(--glow);font-weight:800}
+.hide{display:none!important}
+.header{height:76px;padding:0 clamp(16px,5vw,64px);display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);background:#090b16c9;backdrop-filter:blur(18px);position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.5px}
+.brand-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(140deg,var(--accent),var(--accent2));box-shadow:0 7px 26px var(--glow);font-size:22px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:3px}
+.header-right{display:flex;align-items:center;gap:8px}
+.sound-toggle{font-size:12px;padding:9px 12px}
+.sound-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);margin-left:6px;box-shadow:0 0 10px var(--good)}
+main{width:min(1120px,92%);margin:0 auto;padding:38px 0 52px}
+.screen{animation:screenIn .4s ease both}
+.hero{position:relative;overflow:hidden;min-height:370px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:clamp(25px,5vw,58px);border:1px solid var(--line);border-radius:30px;background:linear-gradient(120deg,#ffffff0b,transparent 60%),var(--surface);box-shadow:0 28px 90px #0003}
+.hero:after{content:"";position:absolute;width:350px;height:350px;left:-100px;top:-130px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 68%);animation:orb 8s ease-in-out infinite}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #ed557c55;background:#ed557c12;color:#ffb0c4;padding:8px 12px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.4px}
+.hero h1{font-size:clamp(36px,5vw,60px);line-height:1.13;letter-spacing:-1.8px;margin:21px 0 14px}
+.hero h1 span{color:var(--accent2);text-shadow:0 0 30px var(--glow)}
+.hero p{max-width:540px;color:var(--muted);line-height:1.95;margin:0 0 25px;font-size:15px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-art{position:relative;z-index:1;display:grid;place-items:center;min-height:250px}
+.orbit{width:min(270px,70vw);aspect-ratio:1;border:1px solid #ed557c55;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:inset 0 0 55px var(--glow),0 0 55px #0002;animation:float 6s ease-in-out infinite}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #ffffff18;border-radius:50%;inset:22px}
+.orbit:after{inset:45px;border-color:#ed557c55}
+.book{width:100px;height:118px;border-radius:8px 15px 15px 8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:43px;box-shadow:0 18px 40px #0005;transform:rotate(-8deg);animation:bookFloat 4s ease-in-out infinite}
+.orbit-chip{position:absolute;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);font-size:11px;box-shadow:0 10px 30px #0004}
+.chip-a{top:20px;right:-7px}
+.chip-b{bottom:28px;left:-14px}
+.chip-c{bottom:8px;right:16px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:18px 0 30px}
+.feature{display:flex;align-items:center;gap:13px;padding:17px;border-radius:17px;border:1px solid var(--line);background:#ffffff06;animation:rise .6s both}
+.feature:nth-child(2){animation-delay:.08s}
+.feature:nth-child(3){animation-delay:.16s}
+.feature-icon{width:43px;height:43px;border-radius:13px;background:var(--surface3);display:grid;place-items:center;font-size:20px}
+.feature strong{display:block;font-size:14px}
+.feature span{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:32px 2px 14px}
+.section-title h2{font-size:23px;margin:0}
+.section-title p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.section-title .english{font-size:10px;color:var(--accent2);letter-spacing:2px;font-weight:800}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.category{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:19px;text-align:right;position:relative;overflow:hidden;animation:rise .5s both}
+.category:after{content:"";position:absolute;inset:auto -35px -60px auto;width:120px;height:120px;border-radius:50%;background:var(--glow);filter:blur(15px)}
+.category:hover{border-color:#ed557c66}
+.cat-icon{font-size:24px}
+.category h3{font-size:16px;margin:12px 0 7px}
+.category p{font-size:12px;color:var(--muted);line-height:1.8;min-height:43px;margin:0 0 15px}
+.cat-foot{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted)}
+.cat-foot b{color:var(--accent2)}
+.home-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:20px;padding:20px 22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(110deg,var(--surface),#ffffff05)}
+.home-bottom p{color:var(--muted);font-size:13px;line-height:1.8;margin:4px 0 0}
+.quiz-shell{max-width:850px;margin:0 auto}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.back-btn{padding:9px 12px;font-size:12px}
+.quiz-brand{font-size:11px;letter-spacing:1.8px;color:var(--muted);font-weight:800}
+.quiz-brand b{color:var(--accent2)}
+.quiz-card{border:1px solid var(--line);border-radius:25px;overflow:hidden;background:var(--surface);box-shadow:0 25px 80px #0003}
+.quiz-card-head{padding:20px 25px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;background:#ffffff04}
+.category-tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:9px;background:#ed557c15;color:#ffb1c5;font-size:11px;font-weight:800}
+.counter{font-size:12px;color:var(--muted);direction:ltr}
+.counter b{color:var(--text);font-size:14px}
+.progress-track{height:4px;background:#ffffff0d}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s;box-shadow:0 0 12px var(--accent2)}
+.quiz-content{padding:clamp(20px,4vw,36px)}
+.question-kicker{font-size:11px;letter-spacing:1.4px;color:var(--accent2);font-weight:900}
+.question{font-size:clamp(20px,3vw,27px);line-height:1.8;margin:13px 0 10px;font-weight:800}
+.passage{background:#ffffff06;border:1px solid var(--line);border-right:3px solid var(--accent2);border-radius:12px;padding:15px 17px;line-height:2.05;color:#e4e8f3;font-size:15px;margin:15px 0}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:23px}
+.answer{display:flex;align-items:center;gap:13px;text-align:right;min-height:68px;padding:13px 15px;background:#ffffff05;border:1px solid var(--line);border-radius:14px;line-height:1.65}
+.letter{flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:#ffffff0b;color:var(--muted);font-size:12px;font-weight:900;direction:ltr}
+.answer:hover:not(:disabled){background:#ed557c12;border-color:#ed557c77}
+.answer.correct{border-color:var(--good);background:#4adea312}
+.answer.correct .letter{background:var(--good);color:#06261b}
+.answer.wrong{border-color:var(--bad);background:#ff708812}
+.answer.wrong .letter{background:var(--bad);color:#3a0710}
+.feedback{display:none;margin-top:17px;padding:15px 17px;border-radius:14px;line-height:1.85;font-size:14px;animation:feedbackIn .3s}
+.feedback.show{display:block}
+.feedback.good{border:1px solid #4adea344;background:#4adea30e}
+.feedback.bad{border:1px solid #ff708844;background:#ff70880c}
+.feedback strong{display:block;margin-bottom:4px}
+.feedback.good strong{color:var(--good)}
+.feedback.bad strong{color:var(--bad)}
+.quiz-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:23px;flex-wrap:wrap}
+.keyboard-hint{font-size:11px;color:var(--muted);line-height:1.7}
+.key{display:inline-block;min-width:22px;text-align:center;padding:2px 6px;border:1px solid var(--line);border-radius:5px;background:#ffffff08;color:var(--text);direction:ltr}
+.bottom-actions{display:flex;gap:8px}
+.score-pill{padding:9px 12px;background:#f5c66d12;border:1px solid #f5c66d30;border-radius:11px;color:var(--gold);font-size:12px;font-weight:800}
+.result-card{max-width:760px;margin:35px auto;border:1px solid var(--line);background:var(--surface);border-radius:28px;padding:clamp(25px,5vw,48px);text-align:center;box-shadow:0 25px 80px #0003}
+.result-icon{width:90px;height:90px;border-radius:28px;margin:0 auto 22px;display:grid;place-items:center;font-size:40px;background:linear-gradient(140deg,var(--accent),var(--accent2));box-shadow:0 15px 45px var(--glow);animation:float 4s infinite}
+.result-card h2{font-size:34px;margin:10px 0}
+.result-card>p{color:var(--muted);line-height:1.8}
+.final-score{font-size:48px;font-weight:900;direction:ltr;margin:20px 0 4px}
+.final-score span{font-size:18px;color:var(--muted)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}
+.result-stat{padding:16px 8px;border:1px solid var(--line);border-radius:14px;background:#ffffff05}
+.result-stat strong{display:block;font-size:22px}
+.result-stat span{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+.result-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.settings-card{max-width:760px;margin:auto;padding:25px;border:1px solid var(--line);border-radius:23px;background:var(--surface)}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.setting{border:1px solid var(--line);background:#ffffff05;border-radius:15px;padding:16px}
+.setting label.title{display:block;font-weight:800;font-size:13px;margin-bottom:10px}
+.setting select{width:100%;padding:11px;border-radius:10px;background:var(--surface2);color:var(--text);border:1px solid var(--line)}
+.setting input{accent-color:var(--accent2)}
+.checkrow{display:flex;gap:9px;align-items:center;font-size:13px;margin-top:10px;color:var(--muted)}
+.footer{text-align:center;color:var(--muted);font-size:11px;line-height:2.1;margin:35px auto 0}
+.footer b{color:var(--text)}
+.toast{position:fixed;bottom:20px;left:20px;z-index:50;padding:13px 17px;background:var(--surface2);border:1px solid var(--line);border-radius:13px;box-shadow:0 10px 30px #0005;animation:rise .25s}
+.spark{position:fixed;top:-20px;z-index:60;pointer-events:none;animation:fall 1.2s ease-in forwards;color:var(--accent2);font-size:19px}
+@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,22px) scale(1.08)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes bookFloat{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-7px)}}
+@keyframes feedbackIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-art{grid-row:1;min-height:210px}.orbit{width:210px}.book{width:75px;height:90px;font-size:34px}.category-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.header{height:auto;min-height:68px;padding:10px 4%}.brand-icon{width:37px;height:37px}.brand{font-size:12px}.brand small{font-size:8px;letter-spacing:1px}.header-right button{padding:8px 9px;font-size:11px}main{width:92%;padding-top:22px}.hero{padding:23px 20px;border-radius:23px}.hero h1{font-size:39px}.hero p{font-size:13px}.hero-art{min-height:185px}.orbit{width:175px}.orbit-chip{font-size:9px;padding:7px 9px}.features{grid-template-columns:1fr;gap:8px}.feature{padding:12px}.category-grid{gap:9px}.category{padding:14px}.category h3{font-size:14px}.category p{font-size:11px;min-height:55px}.home-bottom{align-items:flex-start;flex-direction:column}.answers{grid-template-columns:1fr}.quiz-card-head{padding:15px 16px}.quiz-content{padding:18px 15px}.question{font-size:20px}.answer{min-height:57px}.quiz-bottom{align-items:flex-start;flex-direction:column}.bottom-actions{width:100%}.bottom-actions button{flex:1}.settings-grid{grid-template-columns:1fr}.result-stats{gap:6px}.result-stat{padding:13px 4px}.result-stat strong{font-size:19px}}
+body.no-motion *,body.no-motion *:before,body.no-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+</style>
+</head>
+<body>
+<header class="header">
+    <div class="brand">
+        <div class="brand-icon">ي</div>
+        <div>ARABIC REVISION<small>GRADE 11 • MASTERCLASS</small></div>
+    </div>
+    <div class="header-right">
+        <button onclick="showSettings()">⚙ Settings</button>
+        <button class="sound-toggle" id="soundButton" onclick="toggleSound()"><span class="sound-dot"></span><span id="soundLabel">Sound ON</span></button>
+    </div>
+</header>
+<main>
+<section id="homeScreen" class="screen"> 
+    <div class="hero">
+        <div class="hero-copy">
+            <div class="eyebrow">✦ EXAM PREPARATION • 2026–2027</div>
+            <h1>Arabic<br><span>Revision.</span></h1>
+            <p>راجع ورقة التقويم الأول للصف الحادي عشر بطريقة تفاعلية. أسئلة عشوائية، تصحيح فوري، شرح للإجابة، ومؤثرات صوتية — اتدرّب لحد ما تدخل الامتحان واثق من نفسك.</p>
+            <div class="hero-actions">
+                <button class="primary" onclick="startQuiz('all')">ابدأ Masterclass — 50 سؤالًا ↗</button>
+            </div>
+        </div>
+        <div class="hero-art">
+            <div class="orbit">
+                <div class="book">أ</div>
+                <div class="orbit-chip chip-a">50 Randomized MCQs</div>
+                <div class="orbit-chip chip-b">Instant Feedback ✦</div>
+                <div class="orbit-chip chip-c">Grade 11</div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="features">
+        <div class="feature"><div class="feature-icon">🎯</div><div><strong>50 Questions</strong><span>Randomized question order</span></div></div>
+        <div class="feature"><div class="feature-icon">⚡</div><div><strong>Instant Feedback</strong><span>Animated answers & explanations</span></div></div>
+        <div class="feature"><div class="feature-icon">♫</div><div><strong>Audio FX</strong><span>Synthesized sound effects</span></div></div>
+    </div>  
+    
+    <div class="category-grid"> 
+        <button class="category" onclick="startQuiz('poetry')">
+            <div class="cat-icon">📜</div>
+            <h3>قصيدة المثقب العبدي</h3>
+            <p>الفكرة العامة، الرسالة، وجهة نظر الشاعر، الأساليب، والاستخراج.</p>
+            <div class="cat-foot"><span>POETRY</span><b id="poetryCount">13 Qs</b></div>
+        </button> 
+        <button class="category" onclick="startQuiz('reading')">
+            <div class="cat-icon">📚</div>
+            <h3>النص المعلوماتي</h3>
+            <p>التعليم والتكنولوجيا والتنمية المستدامة والمفردات.</p>
+            <div class="cat-foot"><span>READING</span><b id="readingCount">12 Qs</b></div>
+        </button> 
+        <button class="category" onclick="startQuiz('rhetoric')">
+            <div class="cat-icon">💡</div>
+            <h3>التشبيه التمثيلي</h3>
+            <p>التمييز بين التشبيه التمثيلي والتشبيه البليغ والمفرد.</p>
+            <div class="cat-foot"><span>BALAGHA</span><b id="rhetoricCount">12 Qs</b></div>
+        </button> 
+        <button class="category" onclick="startQuiz('grammar')">
+            <div class="cat-icon">🔤</div>
+            <h3>اسم الزمان والمكان</h3>
+            <p>حدد نوع المشتق حسب المعنى والسياق، وتدرّب على الصيغ.</p>
+            <div class="cat-foot"><span>GRAMMAR</span><b id="grammarCount">13 Qs</b></div>
+        </button>
+    </div> 
+    
+    <div class="home-bottom">
+        <div><strong>جاهز للتحدي الكامل؟</strong><p>50 سؤالًا من موضوعات الورقة، بترتيب متغير في كل محاولة.</p></div>
+        <button class="primary" onclick="startQuiz('all')">Start 50-Question Masterclass →</button>
+    </div>
+</section>
+
+<section id="quizScreen" class="screen hide">
+    <div class="quiz-shell">
+        <div class="quiz-top">
+            <button class="back-btn" onclick="confirmExit()">← Home</button>
+            <div class="quiz-brand">ARABIC <b>MASTERCLASS</b></div>
+            <div class="score-pill">✦ <span id="score">0</span> pts</div>
+        </div>
+        <div class="quiz-card">
+            <div class="quiz-card-head">
+                <div class="category-tag">✦ <span id="categoryName">مراجعة عامة</span></div>
+                <div class="counter">QUESTION <b id="questionNumber">01</b> / <span id="questionTotal">50</span></div>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="quiz-content">
+                <div class="question-kicker">اختار الإجابة الصحيحة</div>
+                <div id="passage" class="passage hide"></div>
+                <div id="questionText" class="question">جاري تحميل السؤال...</div>
+                <div id="answerList" class="answers"></div>
+                <div id="feedback" class="feedback" aria-live="polite"></div>
+                <div class="quiz-bottom">
+                    <div class="keyboard-hint">اختصارات الكيبورد: <span class="key">1</span> <span class="key">2</span> <span class="key">3</span> <span class="key">4</span> للإجابة — <span class="key">Enter</span> للسؤال التالي</div>
+                    <div class="bottom-actions">
+                        <button type="button" id="skipButton" onclick="skipQuestion(); return false;">Skip</button>
+                        <button type="button" id="nextButton" class="primary" onclick="nextQuestion(); return false;" disabled>Next Question →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="resultScreen" class="screen hide">
+    <div class="result-card">
+        <div class="result-icon" id="resultIcon">🏆</div>
+        <div class="eyebrow">MASTERCLASS COMPLETE</div>
+        <h2 id="resultTitle">أحسنت!</h2>
+        <p id="resultMessage">خلصت الجولة بنجاح.</p>
+        <div class="final-score"><b id="finalScore">0</b> <span>/ <span id="finalTotal">50</span> pts</span></div>
+        <div class="result-stats">
+            <div class="result-stat"><strong id="resultAccuracy">0%</strong><span>Accuracy</span></div>
+            <div class="result-stat"><strong id="resultCorrect">0</strong><span>Correct</span></div>
+            <div class="result-stat"><strong id="resultWrong">0</strong><span>Incorrect / Skipped</span></div>
+        </div>
+        <div class="result-actions">
+            <button class="primary" onclick="startQuiz(lastCategory)">Try Again (Reshuffled) ↻</button>
+            <button onclick="showHome()">Back to Home</button>
+        </div>
+    </div>
+</section>
+
+<section id="settingsScreen" class="screen hide">
+    <div class="section-title">
+        <div>
+            <div class="english">PERSONALIZE YOUR EXPERIENCE</div>
+            <h2>Settings</h2>
+            <p>خصّص شكل الموقع وطريقة التدريب</p>
+        </div>
+        <button onclick="showHome()">← Home</button>
+    </div>
+    <div class="settings-card">
+        <div class="settings-grid">
+            <div class="setting">
+                <label class="title" for="themeSelect">Theme Color</label>
+                <select id="themeSelect" onchange="setTheme(this.value)">
+                    <option value="burgundy">Burgundy (Default)</option>
+                    <option value="ocean">Ocean Blue</option>
+                    <option value="emerald">Emerald Green</option>
+                    <option value="violet">Violet</option>
+                </select>
+            </div>
+            <div class="setting">
+                <label class="title" for="roundSelect">Questions per Round</label>
+                <select id="roundSelect">
+                    <option value="10">10 Questions</option>
+                    <option value="20">20 Questions</option>
+                    <option value="30">30 Questions</option>
+                    <option value="50" selected>50 Questions</option>
+                </select>
+            </div>
+            <div class="setting">
+                <label class="title">Sound & Motion</label>
+                <label class="checkrow"><input id="soundCheck" type="checkbox" checked onchange="setSound(this.checked)"> Enable answer sounds</label>
+                <label class="checkrow"><input id="motionCheck" type="checkbox" checked onchange="setMotion(this.checked)"> Enable animations</label>
+            </div>
+            <div class="setting">
+                <label class="title">Quiz Options</label>
+                <label class="checkrow"><input id="explainCheck" type="checkbox" checked onchange="setExplain(this.checked)"> Show answer explanations</label>
+                <label class="checkrow"><input id="shuffleCheck" type="checkbox" checked onchange="setShuffle(this.checked)"> Shuffle question order</label>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <button onclick="resetSettings()">Restore Defaults</button>
+            <button class="primary" onclick="saveSettings()">Save Settings ✓</button>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    Arabic Revision • Grade 11 • First Assessment Review<br>
+    <b>Designed & Built with passion by Yusuf Ghoneim</b>
+</footer>
+</main>
+
+<script>
+const QUESTIONS = [
+    // Poetry
+    ['poetry','لا تقولن إذا ما لم تردْ / أن تتم الوعد في شيءٍ نعمْ','ما الفكرة العامة للأبيات؟',['الالتزام بالوفاء بالعهود، لأن إخلاف الوعد يورث الذم','وصف الطبيعة في الربيع','الفخر بالانتصار في الحرب','الحنين إلى الوطن'],0,'تدور الأبيات حول الصدق في القول والوفاء بالوعد، وتحذير الإنسان من إعطاء وعد لا يستطيع تنفيذه.'],
+    ['poetry','','ما الرسالة التي يريد الشاعر توصيلها للقارئ؟',['أن يوافق على كل طلب','يريد الشاعر أن يعلم القارئ خلق الصدق والوفاء','أن يتجنب التعامل مع الآخرين','أن يغيّر رأيه باستمرار'],1,'يرشد الشاعر إلى تحمّل مسؤولية الكلام، والرفض من البداية أفضل من الوعد ثم الإخلاف.'],
+    ['poetry','إن لا بعد نعم فاحشةٌ / فبلا فابدأ إذا خفت الندمْ','ما معنى «إن لا بعد نعم فاحشة»؟',['الرفض في البداية خطأ دائمًا','قول كلمة «لا» بعد أن تكون قد قلت «نعم» أمر سيئ جدا ويُعد عيبًا كبيرًا','يجب أن يقول نعم دائمًا','لا أهمية للوعود'],1,'المقصود أن يقول الإنسان نعم ثم يتراجع عن وعده أمر مذموم؛ لذلك ينصح الشاعر بالوضوح منذ البداية.'],
+    ['poetry','حسنٌ قولُ نعمْ من بعد لا / وقبيحٌ قولُ لا بعد نعمْ','ما الفكرة التي يوضحها التضاد بين «نعم» و«لا»؟',['إبراز الفرق بين تغيير الرفض إلى موافقة ونقض الموافقة بعد الوعد','أن الكلمتين لهما المعنى نفسه','أن الشاعر يرفض الحوار','أن الموافقة دائمًا خطأ'],0,'المقابلة توضح أن الموافقة بعد الرفض ليست كالتراجع عن وعد سابق، فتقوّي النصيحة.'],
+    ['poetry','','ما وجهة النظر التي يتبناها الشاعر في الأبيات؟',['الإنسان لا يُحاسب على كلامه','الوفاء والصدق من صفات الإنسان الكريم','إلى كل الناس','من الأفضل ألا يتخذ الإنسان قرارًا'],2,'وجهة نظر الشاعر كما وردت في أوراق العمل موجهة «إلى كل الناس» لتذكيرهم بضرورة الالتزام بالقيمة.'],
+    ['poetry','','علّل استهلال الشاعر القصيدة بأسلوب النهي «لا تقولن».',['لإثارة الضحك','للتنبيه والتأكيد على ضرورة الامتناع عن فعل ذلك','للتعبير عن إعجابه بشخص','لطرح سؤال'],1,'أسلوب النهي هنا غرضه التنبيه والتأكيد على ضرورة الامتناع عن قول نعم عند عدم النية للوفاء.'],
+    ['poetry','','أي بيت ينصح فيه الشاعر بعدم قول «نعم» بعد «لا»؟',['لا تقولن إذا ما لم ترد','حسن قول نعم من بعد لا','إن لا بعد نعم فاحشة','واعلم أن الذم نقص للفتى'],2,'البيت الذي يبدأ بـ«إن لا بعد نعم فاحشة» يوضح أن الرفض بعد الموافقة أمر مذموم.'],
+    ['poetry','','ما وظيفة التضاد والمقابلة في الأبيات؟',['إضعاف الفكرة','إظهار المعنى وتوضيحه وتأكيده لدى المتلقي','تغيير موضوع القصيدة','وصف الطبيعة'],1,'التضاد يعمل على إظهار المعنى وتوضيحه وتأكيده لدى المتلقي.'],
+    ['poetry','','استخرج فعل أمر يناسب ما ورد في الأبيات.',['تقولن','فاصبر','فاحشة','الذم'],1,'«فاصبر» فعل أمر ورد في البيت: «فإذا قلت نعم فاصبر لها».'],
+    ['poetry','','في عبارة «إن الخلف ذمّ»، ما الحرف الناسخ؟',['إنّ','إلى','على','إذا'],0,'«إنّ» حرف ناسخ، و«الخلف» اسمها و«ذمّ» خبرها.'],
+    ['poetry','','أي عبارة تتضمن أسلوب شرط؟',['حسن قول نعم','فإذا قلت نعم فاصبر لها','وقبيح قول لا','إن الخلف ذم'],1,'«فإذا قلت نعم فاصبر لها» أسلوب شرط؛ ترتبط الإجابة بتحقق الشرط.'],
+    ['poetry','','ما معنى كلمة «الخُلْف» في سياق الأبيات؟',['الوفاء بالعهد','عدم الوفاء بالوعد','الشجاعة','التواضع'],1,'الخُلْف هو نقض الوعد وعدم الالتزام بما قاله الإنسان.'],
+    ['poetry','','أي صفة يذمها الشاعر؟',['الصدق','الوفاء','إخلاف الوعد','تحمل المسؤولية'],2,'يؤكد الشاعر أن إخلاف الوعد يسبب الذم ويقلل من قدر صاحبه.'],
+
+    // Reading
+    ['reading','التعليم هو حجر الأساس في بناء المجتمعات وتقدم الأمم، فهو الوسيلة التي تسهم في تطوير الأفراد معرفيًا وثقافيًا ومهاريًا.','ما الفكرة الرئيسة للنص المعلوماتي؟',['يؤكد النص أن التعليم هو الأساس في نهضة المجتمعات وتقدمها','تاريخ المدارس قديمًا','أضرار التكنولوجيا فقط','أهمية الرياضة'],0,'النص يوضح أن التعليم أساس تقدم الأمم وتطوير الأفراد من نواحٍ متعددة.'],
+    ['reading','','ما العلاقة بين التعليم والتكنولوجيا وفقًا للنص؟',['التكنولوجيا تمنع الوصول إلى المعرفة','تطوير أساليب التعليم وتسهيل الوصول للمعرفة وجعل العملية أكثر تفاعلية ومرونة','التكنولوجيا تلغي الحاجة إلى التعلم','لا توجد علاقة'],1,'التعلم الإلكتروني والمنصات الرقمية يسهلان الوصول إلى المعرفة ويزيدان التفاعل والمرونة.'],
+    ['reading','','كيف يسهم التعليم في تحقيق التنمية المستدامة؟',['بتقليل الوعي','بمحو الأمية وتمكين الأفراد واكتساب المهارات لمواجهة تحديات العصر','بإضعاف الابتكار','بمنع التكنولوجيا'],1,'ذكر النص محو الأمية وتعزيز الوعي وتمكين الأفراد بالمهارات اللازمة لمواجهة تحديات العصر.'],
+    ['reading','','كيف يسهم التعليم في تمكين الأفراد وبناء المجتمع؟',['تزويدهم بالمعارف وتعزيز قدرتهم على الإنتاج والمشاركة بفاعلية','يعزلهم عن المجتمع','يقلل فرص المشاركة','يمنع اكتساب الخبرات'],0,'التعليم يطوّر الأفراد معرفيًا وثقافيًا ومهاريًا، فيصبحون أكثر قدرة على الإسهام في مجتمعاتهم.'],
+    ['reading','','إلى أي فن ينتمي النص السابق؟',['القصة القصيرة','السيرة الأدبية','النص المعلوماتي','المقال الأدبي'],2,'يعرض النص معلومات عن التعليم وأثره وتحدياته، لذلك ينتمي إلى النص المعلوماتي.'],
+    ['reading','','ما الترادف الموجود في الفقرة الأولى حسب أوراق العمل؟',['الابتكار والإداع','دوراً محورياً','محو الأمية','التنمية المستدامة'],0,'الترادف المباشر بين كلمتين بمعنى متقارب هو «الابتكار والإبداع».'],
+    ['reading','','ما الدور الأساسي الذي يلعبه التعليم في المجتمع؟',['تعزيز القيم الأخلاقية فقط','تحقيق التنمية المستدامة وتمكين الأفراد','القسوة والغلظة','التفكك الأسري'],1,'يربط النص التعليم بالتنمية المستدامة وتمكين الأفراد وبناء مجتمعات أكثر وعيًا واستقرارًا.'],
+    ['reading','','يسهم التعليم في التنمية المستدامة من خلال:',['خفض الإنفاق الحكومي','تقليل استهلاك التكنولوجيا','محو الأمية وتمكين الأفراد من مواجهة تحديات العصر','إلغاء التعليم العالي'],2,'هذا الاختيار يجمع الأفكار التي وردت في النص حول دور التعليم في التنمية المستدامة.'],
+    ['reading','','أيّ مما يأتي من التحديات التي تواجه التعليم في بعض الدول؟',['زيادة عدد المدارس بشكل كبير','التخصصات غير الكافية','ضعف البنية التحتية وقلة الموارد','سهولة الوصول للمعرفة'],2,'ذكر النص قلة الموارد وضعف البنية التحتية وعدم تكافؤ الفرص بوصفها تحديات.'],
+    ['reading','','ما أثر دمج التكنولوجيا في المناهج الدراسية؟',['تقليل التفكير النقدي','تحفيز الطلاب وتنمية مهارات التفكير النقدي','منع التعلم الإلكتروني','إضعاف التفاعل'],1,'وفقًا للنص، يساعد دمج التكنولوجيا في تحفيز الطلاب وتنمية مهارات التفكير النقدي.'],
+    ['reading','','ما المقصود بتعبير «حجر الأساس» في بداية النص؟',['عقبة تمنع التقدم','الأساس الذي يقوم عليه البناء والنهضة','شيء غير ضروري','نهاية الطريق'],1,'تعبير مجازي يعني أن التعليم أساس مهم يُبنى عليه تقدم المجتمعات.'],
+    ['reading','','أي عبارة تلخص خاتمة النص؟',['التعليم استثمار مهم في مستقبل الأفراد والأمم','التعليم لا يؤثر في المستقبل','المعرفة غير مهمة','التكنولوجيا هي التحدي الوحيد'],0,'الخاتمة تؤكد أن التعليم ليس مجرد وسيلة لاكتساب المعرفة، بل طريق للتقدم والازدهار.'],
+
+    // Rhetoric
+    ['rhetoric','﴿مَثَلُ الَّذِينَ كَفَرُوا بِرَبِّهِمْ أَعْمَالُهُمْ كَرَمَادٍ اشْتَدَّتْ بِهِ الرِّيحُ﴾','ما نوع التشبيه في الآية؟',['تشبيه تمثيلي','تشبيه بليغ مفرد','استعارة مكنية','كناية'],0,'تشبيه تمثيلي لأنه يشبه أعمال الكفار بالرماد الذي تفرقه الريح.'],
+    ['rhetoric','﴿مَثَلُ الَّذِينَ حُمِّلُوا التَّوْرَاةَ ثُمَّ لَمْ يَحْمِلُوهَا كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا﴾','لماذا يُعد هذا تشبيهًا تمثيليًا؟',['لأنه يشبه حال قوم أوكل إليهم العلم ولم يعملوا به بحال حمار يحمل كتبًا ولا ينتفع بها','لأنه لا يحتوي على مشبه به','لأنه يتكون من كلمة واحدة','لأنه سؤال إنشائي'],0,'التشبيه التمثيلي يقارن بين صورة بصورة أو هيئة مركبة.'],
+    ['rhetoric','','ما المقصود بالتشبيه التمثيلي؟',['تشبيه مفرد بمفرد في صفة واحدة فقط','تشبيه صورة أو هيئة بصورة أو هيئة أخرى','استخدام كلمة بمعنى مضاد','سؤال لا يحتاج إلى إجابة'],1,'التشبيه التمثيلي هو ما كان وجه الشبه فيه صورة منتزعة من عدة عناصر أو هيئة كاملة.'],
+    ['rhetoric','الأم مدرسة.','ما نوع التشبيه في عبارة «الأم مدرسة»؟',['تشبيه تمثيلي','تشبيه بليغ','تشبيه مرسل مفصل','أسلوب شرط'],1,'حُذفت أداة التشبيه ووجه الشبه، وبقي المشبه والمشبه به؛ فهو تشبيه بليغ.'],
+    ['rhetoric','','ما الفرق الأوضح بين التشبيه المفرد والتشبيه التمثيلي؟',['لا فرق بينهما','المفرد يشبه شيئًا بشيء في صفة، والتمثيلي يشبه هيئة كاملة بهيئة','التمثيلي لا يحتوي على مشبه','المفرد لا يحمل معنى'],1,'التشبيه التمثيلي يعتمد على صورة مركبة، أما المفرد فيركّز غالبًا على صفة مفردة.'],
+    ['rhetoric','','أي مثال أقرب إلى التشبيه التمثيلي؟',['الطالب كالأسد في الشجاعة','العلم نور','حال من يهدر الفرص كحال من يزرع أرضًا ثم لا يرعاها','السماء زرقاء'],2,'المثال الثالث يقارن بين حالتين كاملتين؛ لذلك فهو أقرب إلى التشبيه التمثيلي.'],
+    ['rhetoric','','ما الغرض من التشبيه التمثيلي غالبًا؟',['توضيح المعنى وتقريبه بصورة مؤثرة','إخفاء المعنى تمامًا','تكرار الكلمات بلا فائدة','إلغاء التأثير'],0,'يقرّب التشبيه التمثيلي الفكرة من الذهن عن طريق صورة واضحة ومؤثرة.'],
+    ['rhetoric','','ما الذي يميز وجه الشبه في التشبيه التمثيلي؟',['أنه كلمة واحدة دائمًا','أنه صورة أو هيئة مركبة','أنه غير موجود','أنه اسم علم'],1,'وجه الشبه في التشبيه التمثيلي صورة مركبة من عناصر متعددة.'],
+    ['rhetoric','','أي عبارة تمثل تشبيهًا بليغًا؟',['الجندي كالأسد في الشجاعة','الجندي أسد','الجندي شجاع كالأسد','كأن الجندي أسد'],1,'«الجندي أسد» تشبيه بليغ؛ لأنه حذف الأداة ووجه الشبه.'],
+    ['rhetoric','','في التشبيه «العلم كالنور في الهداية»، ما أداة التشبيه؟',['العلم','النور','الكاف','الهداية'],2,'الكاف في «كالنور» هي أداة التشبيه.'],
+    ['rhetoric','','في «العلم كالنور في الهداية»، ما وجه الشبه؟',['العلم','النور','الكاف','الهداية'],3,'وجه الشبه هو الصفة المشتركة بين الطرفين، وهي الهداية.'],
+    ['rhetoric','','أي اختيار يوضح تشبيهًا قائمًا على صورة كاملة؟',['وجه الطفل كالقمر','حال المتردد كحال من يقف عند مفترق طرق لا يعرف أيها يسلك','الطالب مجتهد','الصوت جميل'],1,'المثال الثاني يصور موقفًا مركبًا ويقارنه بموقف آخر، وهو ما يميز التشبيه التمثيلي.'],
+
+    // Grammar
+    ['grammar','','في جملة «جلسنا في مَجلِسٍ واسع»، ما نوع كلمة «مجلس»؟',['اسم مكان','اسم زمان','مصدر','اسم مفعول'],0,'«مجلس» هنا يدل على المكان الذي يجلس فيه الناس، فهو اسم مكان.'],
+    ['grammar','','في جملة «اتجه الحجاج نحو المَسعى»، ما نوع «المسعى»؟',['اسم مكان','اسم زمان','اسم فاعل','صفة مشبهة'],0,'«المسعى» يدل على مكان السعي، فهو اسم مكان في الجملة.'],
+    ['grammar','','في جملة «سألتك عن مَوْعِد الامتحان»، ما نوع «موعد»؟',['اسم زمان','اسم مكان','صفة مشبهة','اسم مفعول'],0,'«موعد الامتحان» يدل على وقت الامتحان، فهو اسم زمان حسب السياق.'],
+    ['grammar','','في جملة «ظهر نور الشمس عند المَطلِع»، ما نوع «المطلع»؟',['اسم مكان','اسم زمان','اسم مفعول','اسم فاعل'],0,'المقصود هنا مكان طلوع الشمس، لذلك الإجابة الصحيحة هي اسم مكان.'],
+    ['grammar','','في جملة «ذهبت إلى مَبيت الحجاج»، ما نوع «مبيت» وفق سياق الجملة؟',['اسم مكان','اسم زمان','اسم فاعل','فعل أمر'],0,'«مبيت الحجاج» في هذه الجملة يدل على مكان المبيت.'],
+    ['grammar','','في جملة «انتظر الطلاب في مَوقِف الحافلات»، ما نوع «موقف»؟',['اسم مكان','اسم زمان','فعل أمر','مصدر'],0,'«موقف الحافلات» يدل على موضع وقوف الحافلات.'],
+    ['grammar','','ما اسم المكان من الفعل (زرع)؟',['زارع','مَزْرَعَة','مزروع','زراعة'],1,'اسم المكان من زرع هو المزرعة.'],
+    ['grammar','','ما اسم الزمان من الفعل (وعد)؟',['واعد','مووعود','مَوْعِد','متواعد'],2,'الفعل معتل المثال، واسم الزمان منه مَوْعِد على وزن مَفْعِل.'],
+    ['grammar','','ما اسم المكان من الفعل (خرج)؟',['خارج','مَخْرَج','مخروج','استخراج'],1,'اسم المكان من خرج هو مَخْرَج على وزن مَفْعَل.'],
+    ['grammar','','ما اسم الزمان أو المكان من الفعل (سكن)؟',['ساكن','مسكون','مَسْكَن','إسكان'],2,'اسم المكان من سكن هو مَسْكَن.'],
+    ['grammar','','ما اسم المكان من الفعل (قعد)؟',['قاعد','مَقْعَد','مقعود','قعود'],1,'اسم المكان من قعد هو مَقْعَد.'],
+    ['grammar','','ما اسم الزمان أو المكان من الفعل (شرب)؟',['شارب','مَشْرَب','مشروب','شراب'],1,'اسم المكان أو الزمان من شرب هو مَشْرَب.']
+];
+
+// App State
+let soundEnabled = true;
+let motionEnabled = true;
+let showExplanation = true;
+let shuffleEnabled = true;
+let currentRoundQuestions = [];
+let currentQIndex = 0;
+let score = 0;
+let lastCategory = 'all';
+let audioCtx = null;
+
+// Initialize Sound
+function playSound(type) {
+    if(!soundEnabled) return;
+    try {
+        if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        if(type === 'correct') {
+            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+        } else if(type === 'wrong') {
+            osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+            osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2); // A2
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+        }
+    } catch(e) {}
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById('soundLabel').innerText = soundEnabled ? 'Sound ON' : 'Sound OFF';
+    document.getElementById('soundCheck').checked = soundEnabled;
+}
+
+function setSound(val) {
+    soundEnabled = val;
+    document.getElementById('soundLabel').innerText = soundEnabled ? 'Sound ON' : 'Sound OFF';
+}
+
+function setMotion(val) {
+    motionEnabled = val;
+    document.body.classList.toggle('no-motion', !val);
+}
+
+function setExplain(val) { showExplanation = val; }
+function setShuffle(val) { shuffleEnabled = val; }
+
+function setTheme(theme) {
+    const root = document.documentElement;
+    if(theme === 'burgundy') {
+        root.style.setProperty('--accent', '#800020');
+        root.style.setProperty('--accent2', '#ed557c');
+        root.style.setProperty('--glow', '#80002055');
+    } else if(theme === 'ocean') {
+        root.style.setProperty('--accent', '#0284c7');
+        root.style.setProperty('--accent2', '#38bdf8');
+        root.style.setProperty('--glow', '#0284c755');
+    } else if(theme === 'emerald') {
+        root.style.setProperty('--accent', '#059669');
+        root.style.setProperty('--accent2', '#34d399');
+        root.style.setProperty('--glow', '#05966955');
+    } else if(theme === 'violet') {
+        root.style.setProperty('--accent', '#7c3aed');
+        root.style.setProperty('--accent2', '#a78bfa');
+        root.style.setProperty('--glow', '#7c3aed55');
+    }
+}
+
+// Navigation
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hide'));
+    document.getElementById(id).classList.remove('hide');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showHome() { showScreen('homeScreen'); }
+function showSettings() { showScreen('settingsScreen'); }
+
+function confirmExit() {
+    if(confirm('هل أنت تأكد من الخروج من الاختبار الحالي؟')) {
+        showHome();
+    }
+}
+
+// Quiz Flow
+function startQuiz(cat) {
+    lastCategory = cat;
+    let pool = cat === 'all' ? [...QUESTIONS] : QUESTIONS.filter(q => q[0] === cat);
+    
+    if(shuffleEnabled) {
+        pool.sort(() => Math.random() - 0.5);
+    }
+
+    const limit = parseInt(document.getElementById('roundSelect').value) || 50;
+    currentRoundQuestions = pool.slice(0, limit);
+    
+    currentQIndex = 0;
+    score = 0;
+    
+    document.getElementById('score').innerText = '0';
+    document.getElementById('questionTotal').innerText = currentRoundQuestions.length;
+    
+    const catMap = { 'poetry': 'قصيدة المثقب العبدي', 'reading': 'النص المعلوماتي', 'rhetoric': 'التشبيه التمثيلي', 'grammar': 'اسم الزمان والمكان', 'all': 'مراجعة عامة' };
+    document.getElementById('categoryName').innerText = catMap[cat] || 'مراجعة عامة';
+
+    showScreen('quizScreen');
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const q = currentRoundQuestions[currentQIndex];
+    document.getElementById('questionNumber').innerText = (currentQIndex + 1).toString().padStart(2, '0');
+    
+    const progress = ((currentQIndex) / currentRoundQuestions.length) * 100;
+    document.getElementById('progressFill').style.width = `${progress}%`;
+
+    const passageEl = document.getElementById('passage');
+    if(q[1] && q[1].trim() !== '') {
+        passageEl.innerText = q[1];
+        passageEl.classList.remove('hide');
+    } else {
+        passageEl.classList.add('hide');
+    }
+
+    document.getElementById('questionText').innerText = q[2];
+    
+    const ansList = document.getElementById('answerList');
+    ansList.innerHTML = '';
+
+    const feedbackEl = document.getElementById('feedback');
+    feedbackEl.className = 'feedback';
+    feedbackEl.innerText = '';
+
+    document.getElementById('nextButton').disabled = true;
+    document.getElementById('skipButton').disabled = false;
+
+    const letters = ['أ', 'ب', 'ج', 'د'];
+    q[3].forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        btn.onclick = () => selectAnswer(idx);
+        btn.innerHTML = `<span class="letter">${letters[idx]}</span><span>${opt}</span>`;
+        ansList.appendChild(btn);
+    });
+}
+
+function selectAnswer(optIdx) {
+    const q = currentRoundQuestions[currentQIndex];
+    const isCorrect = optIdx === q[4];
+    const buttons = document.querySelectorAll('.answer');
+
+    buttons.forEach(b => b.disabled = true);
+    document.getElementById('skipButton').disabled = true;
+
+    if(isCorrect) {
+        buttons[optIdx].classList.add('correct');
+        score += 10;
+        document.getElementById('score').innerText = score;
+        playSound('correct');
+    } else {
+        buttons[optIdx].classList.add('wrong');
+        buttons[q[4]].classList.add('correct');
+        playSound('wrong');
+    }
+
+    if(showExplanation && q[5]) {
+        const fb = document.getElementById('feedback');
+        fb.innerHTML = `<strong>${isCorrect ? 'إجابة صحيحة! 🎉' : 'إجابة خاطئة ❌'}</strong>${q[5]}`;
+        fb.className = `feedback show ${isCorrect ? 'good' : 'bad'}`;
+    }
+
+    document.getElementById('nextButton').disabled = false;
+}
+
+function skipQuestion() {
+    const q = currentRoundQuestions[currentQIndex];
+    const buttons = document.querySelectorAll('.answer');
+    buttons.forEach(b => b.disabled = true);
+    buttons[q[4]].classList.add('correct');
+
+    if(showExplanation && q[5]) {
+        const fb = document.getElementById('feedback');
+        fb.innerHTML = `<strong>تم تخطي السؤال ⚠️</strong>الإجابة الصحيحة موضحة أعلاه: ${q[5]}`;
+        fb.className = 'feedback show bad';
+    }
+
+    document.getElementById('nextButton').disabled = false;
+}
+
+function nextQuestion() {
+    currentQIndex++;
+    if(currentQIndex < currentRoundQuestions.length) {
+        loadQuestion();
+    } else {
+        finishQuiz();
+    }
+}
+
+function finishQuiz() {
+    const total = currentRoundQuestions.length;
+    const maxScore = total * 10;
+    const accuracy = Math.round((score / maxScore) * 100) || 0;
+
+    document.getElementById('finalScore').innerText = score;
+    document.getElementById('finalTotal').innerText = maxScore;
+    document.getElementById('resultAccuracy').innerText = `${accuracy}%`;
+    document.getElementById('resultCorrect').innerText = Math.round(score / 10);
+    document.getElementById('resultWrong').innerText = total - Math.round(score / 10);
+
+    if(accuracy >= 85) {
+        document.getElementById('resultIcon').innerText = '🏆';
+        document.getElementById('resultTitle').innerText = 'ممتاز جداً يا بطل!';
+        document.getElementById('resultMessage').innerText = 'أداء أسطوري! أنت جاهز للتقويم الأول بنسبة 100%';
+        triggerConfetti();
+    } else if(accuracy >= 60) {
+        document.getElementById('resultIcon').innerText = '🌟';
+        document.getElementById('resultTitle').innerText = 'نتيجة جيدة جداً!';
+        document.getElementById('resultMessage').innerText = 'قريب جداً من الدرجة النهائية، راجع الأسئلة المتبقية وكرر المحاولة.';
+    } else {
+        document.getElementById('resultIcon').innerText = '📚';
+        document.getElementById('resultTitle').innerText = 'تحتاج المزيد من المراجعة';
+        document.getElementById('resultMessage').innerText = 'لا تقلق! أعد المحاولة وستتحسن إجاباتك بالتأكيد.';
+    }
+
+    showScreen('resultScreen');
+}
+
+function triggerConfetti() {
+    for(let i = 0; i < 30; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.innerText = ['✦', '★', '🎉', '✨'][Math.floor(Math.random() * 4)];
+        spark.style.left = Math.random() * 100 + 'vw';
+        spark.style.animationDuration = (Math.random() * 1 + 1) + 's';
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 2000);
+    }
+}
+
+function saveSettings() {
+    toast('تم حفظ الإعدادات بنجاح!');
+    showHome();
+}
+
+function resetSettings() {
+    document.getElementById('themeSelect').value = 'burgundy';
+    setTheme('burgundy');
+    document.getElementById('roundSelect').value = '50';
+    document.getElementById('soundCheck').checked = true;
+    setSound(true);
+    document.getElementById('motionCheck').checked = true;
+    setMotion(true);
+    document.getElementById('explainCheck').checked = true;
+    setExplain(true);
+    document.getElementById('shuffleCheck').checked = true;
+    setShuffle(true);
+    toast('تم استعادة الإعدادات الافتراضية');
+}
+
+function toast(msg) {
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerText = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2500);
+}
+
+// Keyboard Listeners
+document.addEventListener('keydown', (e) => {
+    const quizScreen = document.getElementById('quizScreen');
+    if(quizScreen.classList.contains('hide')) return;
+
+    if(['1', '2', '3', '4'].includes(e.key)) {
+        const idx = parseInt(e.key) - 1;
+        const buttons = document.querySelectorAll('.answer');
+        if(buttons[idx] && !buttons[idx].disabled) {
+            selectAnswer(idx);
+        }
+    } else if(e.key === 'Enter') {
+        const nextBtn = document.getElementById('nextButton');
+        if(!nextBtn.disabled) {
+            nextQuestion();
+        }
+    }
+});
+</script>
+</body>
+</html>
